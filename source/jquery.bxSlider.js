@@ -2,8 +2,8 @@
  * jQuery bxSlider v3.0
  * http://bxslider.com
  *
- * Copyright 2010, Steven Wanderski
- * http://stevenwanderski.com
+ * Copyright 2011, Steven Wanderski
+ * http://bxcreative.com
  *
  * Free to use and abuse under the MIT license.
  * http://www.opensource.org/licenses/mit-license.php
@@ -1235,8 +1235,11 @@
 			return sample;
 		}
 												
-		this.each(function(){			
-			base.initShow();
+		this.each(function(){
+			// make sure the element has children
+			if($(this).children().length > 0){
+				base.initShow();
+			}
 		});
 				
 		return this;						
