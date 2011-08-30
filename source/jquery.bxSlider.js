@@ -1028,7 +1028,7 @@
 				}
 			}else if(type == 'short') {
 				// build the short pager
-				pagerString = '<span class="bx-pager-current">'+(options.startingSlide+1)+'</span> '+options.pagerShortSeparator+' <span class="bx-pager-total">'+$children.length+'<span>';
+				pagerString = '<span class="bx-pager-current">'+(options.startingSlide+1)+'</span> '+options.pagerShortSeparator+' <span class="bx-pager-total">'+$children.length+'</span>';
 			}	
 			// check if user supplied a pager selector
 			if(options.pagerSelector){
