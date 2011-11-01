@@ -406,7 +406,9 @@
 			if(typeof(changeText) == 'undefined'){
 				var changeText = true;
 			}
-			setAutoInterval();
+			if(autoPlaying){
+				setAutoInterval();
+			}
 			if(changeText && options.autoControls){
 				$autoControls.html($stopContent).removeClass('start').addClass('stop');
 			}
@@ -416,16 +418,16 @@
 		 * Stop the slideshow permanently
 		 */		
 		this.stopShow = function(changeText){
-			this.suspendShow(changeText);
 			autoPlaying = false;
+			this.suspendShow(changeText);
 		}
 		
 		/**
 		 * Start the slideshow
 		 */		
 		this.startShow = function(changeText){
-			this.restartShow(changeText);
 			autoPlaying = true;
+			this.restartShow(changeText);
 		}
 		
 		/**
@@ -577,6 +579,7 @@
 				// check if show should auto start
 				if(options.autoStart){
 					// check if autostart should delay
+					autoPlaying = false; // prevent playing during the deplay
 					setTimeout(function(){
 						base.startShow(true);
 					}, options.autoDelay);
