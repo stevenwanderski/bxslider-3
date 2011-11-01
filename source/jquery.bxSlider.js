@@ -385,9 +385,9 @@
 		}
 		
 		/**
-		 * Stop the slideshow
+		 * Suspend the slideshow
 		 */		
-		this.stopShow = function(changeText){
+		this.suspendShow = function(changeText){
 			clearInterval(interval);
 			// check if changeText argument is supplied
 			if(typeof(changeText) == 'undefined'){
@@ -395,14 +395,13 @@
 			}
 			if(changeText && options.autoControls){
 				$autoControls.html($startContent).removeClass('stop').addClass('start');
-				autoPlaying = false;
 			}
 		}
 		
 		/**
-		 * Start the slideshow
+		 * Restart the suspended slideshow
 		 */		
-		this.startShow = function(changeText){
+		this.restartShow = function(changeText){
 			// check if changeText argument is supplied
 			if(typeof(changeText) == 'undefined'){
 				var changeText = true;
@@ -410,8 +409,23 @@
 			setAutoInterval();
 			if(changeText && options.autoControls){
 				$autoControls.html($stopContent).removeClass('start').addClass('stop');
-				autoPlaying = true;
 			}
+		}
+		
+		/**
+		 * Stop the slideshow permanently
+		 */		
+		this.stopShow = function(changeText){
+			this.suspendShow(changeText);
+			autoPlaying = false;
+		}
+		
+		/**
+		 * Start the slideshow
+		 */		
+		this.startShow = function(changeText){
+			this.restartShow(changeText);
+			autoPlaying = true;
 		}
 		
 		/**
@@ -889,11 +903,11 @@
 			// hover over the slider window
 			$outerWrapper.find('.bx-window').hover(function() {
 				if(autoPlaying){
-					base.stopShow(false);
+					base.suspendShow(false);
 				}
 			}, function() {
 				if(autoPlaying){
-					base.startShow(false);
+					base.restartShow(false);
 				}
 			});
 		}
@@ -905,11 +919,11 @@
 			// on hover stop the animation
 			$parent.hover(function() {
 				if(autoPlaying){
-					base.stopTicker(false);
+					base.suspendShow(false);
 				}
 			}, function() {
 				if(autoPlaying){
-					base.startTicker(false);
+					base.restartTicker(false);
 				}
 			});
 		}		
