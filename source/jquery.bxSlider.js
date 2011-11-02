@@ -765,6 +765,8 @@
 		 */		
 		function setAutoInterval(){
 			if(options.auto){
+				clearInterval(interval); // clear any existing interval
+				
 				// finite loop
 				if(!options.infiniteLoop){
 					if(options.autoDirection == 'next'){
