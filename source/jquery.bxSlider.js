@@ -73,7 +73,7 @@
 		var base = this;
 		// initialize (and localize) all variables
 		var $parent = '';
-		var $origElement = '';
+		//var $origElement = '';
 		var $children = '';
 		var $outerWrapper = '';
 		var $firstChild = '';
@@ -484,7 +484,7 @@
 			// reinitialize all variables
 			// base = this;
 			$parent = $(this);
-			$origElement = $parent.clone();
+			//$origElement = $parent.clone();
 			$children = $parent.children();
 			$outerWrapper = '';
 			$firstChild = $parent.children(':first');
@@ -528,13 +528,18 @@
 			if(options.randomStart){
 				var randomNumber = Math.floor(Math.random() * $children.length);
 				currentSlide = randomNumber;
+				if(!options.infiniteLoop)
+					randomNumber--;
 				origLeft = childrenOuterWidth * (options.moveSlideQty + randomNumber);
 				origTop = childrenMaxHeight * (options.moveSlideQty + randomNumber);
 			// start show at specific slide
 			}else{
 				currentSlide = options.startingSlide;
-				origLeft = childrenOuterWidth * (options.moveSlideQty + options.startingSlide);
-				origTop = childrenMaxHeight * (options.moveSlideQty + options.startingSlide);
+				var infLoopOffset = 0;
+				if(!options.infiniteLoop)
+					infLoopOffset = -1;
+				origLeft = childrenOuterWidth * (options.moveSlideQty + options.startingSlide + infLoopOffset);
+				origTop = childrenMaxHeight * (options.moveSlideQty + options.startingSlide + infLoopOffset);
 			}
 						
 			// set initial css
@@ -688,13 +693,15 @@
 			// lays out children for horizontal or vertical modes
 			if(options.mode == 'horizontal' || options.mode == 'vertical'){
 								
-				// get the children behind
-				var $prependedChildren = getArraySample($children, 0, options.moveSlideQty, 'backward');
-				
-				// add each prepended child to the back of the original element
-				$.each($prependedChildren, function(index) {
-					$parent.prepend($(this));
-				});			
+				if(options.infiniteLoop){
+					// get the children behind
+					var $prependedChildren = getArraySample($children, 0, options.moveSlideQty, 'backward');
+					
+					// add each prepended child to the back of the original element
+					$.each($prependedChildren, function(index) {
+						$parent.prepend($(this));
+					});			
+				}		
 				
 				// total number of slides to be hidden after the window
 				var totalNumberAfterWindow = ($children.length + options.moveSlideQty) - 1;
@@ -1257,4 +1264,3 @@
 
 		
 })(jQuery);
-
