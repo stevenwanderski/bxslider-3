@@ -691,10 +691,13 @@
 				// get the children behind
 				var $prependedChildren = getArraySample($children, 0, options.moveSlideQty, 'backward');
 				
-				// add each prepended child to the back of the original element
-				$.each($prependedChildren, function(index) {
-					$parent.prepend($(this));
-				});			
+				// only if we are looping do we need to prepend children
+				if(options.infiniteLoop){
+					// add each prepended child to the back of the original element
+					$.each($prependedChildren, function(index) {
+						$parent.prepend($(this));
+					});
+				}
 				
 				// total number of slides to be hidden after the window
 				var totalNumberAfterWindow = ($children.length + options.moveSlideQty) - 1;
