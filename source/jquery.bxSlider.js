@@ -1146,11 +1146,8 @@
 				}else{
 					$('.bx-prev', $outerWrapper).show();
 				}
-				alert(currentSlide);
-				alert(lastSlide);
 				// check next
-				if(currentSlide == lastSlide ||
-                    currentSlide + options.moveSlideQty > lastSlide){
+				if(currentSlide == lastSlide){
 					$('.bx-next', $outerWrapper).hide();
 				}else{
 					$('.bx-next', $outerWrapper).show();
