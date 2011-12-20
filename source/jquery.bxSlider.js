@@ -1,7 +1,10 @@
 /**
- * jQuery bxSlider v3.0
- * http://bxslider.com
+ * My version of the plugin jQuery bxSlider v3.0
+ * https://github.com/alessandro-sena/bxslider
  *
+ * The bug when lastSlide is not multiple of displaySlideQty is fixed
+ *	
+ * Original version created by Steven Wanderski
  * Copyright 2011, Steven Wanderski
  * http://bxcreative.com
  *
@@ -9,7 +12,6 @@
  * http://www.opensource.org/licenses/mit-license.php
  * 
  */
-
 
 (function($){
 	
@@ -1147,7 +1149,11 @@
 					$('.bx-prev', $outerWrapper).show();
 				}
 				// check next
-				if(currentSlide == lastSlide){
+				
+				//Fixes the bug when lastSlide is not multiple of displaySlideQty
+				var lastPossibleSlide = Math.floor(lastSlide/options.displaySlideQty)*options.displaySlideQty;
+
+				if(currentSlide >= lastPossibleSlide){
 					$('.bx-next', $outerWrapper).hide();
 				}else{
 					$('.bx-next', $outerWrapper).show();
