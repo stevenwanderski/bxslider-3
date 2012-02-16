@@ -1158,11 +1158,11 @@
 		/**
 		 * Returns the left offset of the slide from the parent container
 		 */		
-		function getSlidePosition(number, side){			
+		function getSlidePosition(number, side){						
 			if(side == 'left'){
-				var position = $('.pager', $outerWrapper).eq(number).position().left;
+				var position = $parent.find(' > .pager').eq(number).position().left;
 			}else if(side == 'top'){
-				var position = $('.pager', $outerWrapper).eq(number).position().top;
+				var position = $parent.find(' > .pager').eq(number).position().left;
 			}
 			return position;
 		}
