@@ -550,7 +550,7 @@
 			}
 						
 			// check to show controls
-			if(options.controls && !options.ticker){
+			if(options.controls && !options.ticker && $children.length > 1){
 				setControlsVars();
 			}
 						
@@ -632,7 +632,7 @@
 				.css({
 				  width: '999999px',
 				  position: 'relative',
-					left: '-'+(origLeft)+'px'
+					left: '-'+(options.infiniteLoop ? origLeft : 0)+'px'
 				});
 				$parent.children().css({
 					width: childrenWidth,
@@ -686,8 +686,7 @@
 		 */		
 		function setChildrenLayout(){			
 			// lays out children for horizontal or vertical modes
-			if(options.mode == 'horizontal' || options.mode == 'vertical'){
-								
+			if( (options.mode == 'horizontal' || options.mode == 'vertical') && options.infiniteLoop) {
 				// get the children behind
 				var $prependedChildren = getArraySample($children, 0, options.moveSlideQty, 'backward');
 				
@@ -1257,4 +1256,3 @@
 
 		
 })(jQuery);
-
