@@ -1,9 +1,12 @@
 /**
- * jQuery bxSlider v3.0
+ * jQuery bxSlider v3.1
  * http://bxslider.com
  *
  * Copyright 2011, Steven Wanderski
  * http://bxcreative.com
+ *
+ * Edited by Larry Gordon
+ * http://blog.psyrendust.com
  *
  * Free to use and abuse under the MIT license.
  * http://www.opensource.org/licenses/mit-license.php
@@ -1147,7 +1150,8 @@
 					$('.bx-prev', $outerWrapper).show();
 				}
 				// check next
-				if(currentSlide == lastSlide){
+				// Had to fix an issue where the bx-next button would not hide if the displaySlideQty was greater than 1
+				if(currentSlide == lastSlide || (options.displaySlideQty > 1 && (lastSlide-currentSlide) < options.displaySlideQty)){
 					$('.bx-next', $outerWrapper).hide();
 				}else{
 					$('.bx-next', $outerWrapper).show();
@@ -1257,4 +1261,3 @@
 
 		
 })(jQuery);
-
