@@ -1140,6 +1140,8 @@
 		 */		
 		function checkEndControls(){
 			if(!options.infiniteLoop && options.hideControlOnEnd){
+				// find the total number of slides, if the moveSlideQty > 1
+				var numPages = parseInt(lastSlide / options.moveSlideQty, 10);
 				// check previous
 				if(currentSlide == firstSlide){
 					$('.bx-prev', $outerWrapper).hide();				
@@ -1147,7 +1149,7 @@
 					$('.bx-prev', $outerWrapper).show();
 				}
 				// check next
-				if(currentSlide == lastSlide){
+				if(parseInt(currentSlide / options.moveSlideQty, 10) == numPages){
 					$('.bx-next', $outerWrapper).hide();
 				}else{
 					$('.bx-next', $outerWrapper).show();
