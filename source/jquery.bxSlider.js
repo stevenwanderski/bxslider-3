@@ -1,4 +1,4 @@
-/**
+/*!
  * jQuery bxSlider v3.1
  * http://bxslider.com
  *
@@ -1248,16 +1248,5 @@
 				
 		return this;						
 	}
-	
-	jQuery.fx.prototype.cur = function(){
-		if ( this.elem[this.prop] != null && (!this.elem.style || this.elem.style[this.prop] == null) ) {
-			return this.elem[ this.prop ];
-		}
-
-		var r = parseFloat( jQuery.css( this.elem, this.prop ) );
-		// return r && r > -10000 ? r : 0;
-		return r;
-	}
-
 		
 })(jQuery);
