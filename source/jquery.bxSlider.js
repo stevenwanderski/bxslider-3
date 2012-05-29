@@ -601,9 +601,9 @@
 			// unwrap all bx-wrappers
 			$parent.unwrap().unwrap().removeAttr('style');
 			// remove any styles that were appended
-			$parent.children().removeAttr('style').not('.pager').remove();
+			$parent.children().removeAttr('style').not('.bx-child').remove();
 			// remove any childrent that were appended
-			$children.removeClass('pager');
+			$children.removeClass('bx-child');
 			
 		}
 		
@@ -640,7 +640,7 @@
 				  listStyle: 'none'
 				});					
 				$outerWrapper = $parent.parent().parent();
-				$children.addClass('pager');
+				$children.addClass('bx-child');
 			// CSS for vertical mode
 			}else if(options.mode == 'vertical'){
 				// wrap the <ul> in div that acts as a window and make the <ul> uber tall
@@ -657,7 +657,7 @@
 					height: childrenMaxHeight
 				});					
 				$outerWrapper = $parent.parent().parent();
-				$children.addClass('pager');
+				$children.addClass('bx-child');
 			// CSS for fade mode
 			}else if(options.mode == 'fade'){
 				// wrap the <ul> in div that acts as a window
@@ -792,7 +792,7 @@
 				options.tickerSpeed *= 10;
 												
 				// get the total width of the original show
-				$('.pager', $outerWrapper).each(function(index) {
+				$('.bx-child', $outerWrapper).each(function(index) {
 				  origShowWidth += $(this).width();
 					origShowHeight += $(this).height();
 				});
@@ -1160,9 +1160,9 @@
 		 */		
 		function getSlidePosition(number, side){			
 			if(side == 'left'){
-				var position = $('.pager', $outerWrapper).eq(number).position().left;
+				var position = $('.bx-child', $outerWrapper).eq(number).position().left;
 			}else if(side == 'top'){
-				var position = $('.pager', $outerWrapper).eq(number).position().top;
+				var position = $('.bx-child', $outerWrapper).eq(number).position().top;
 			}
 			return position;
 		}
