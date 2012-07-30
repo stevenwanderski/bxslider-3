@@ -1179,10 +1179,23 @@
 		 * Returns the height of the wrapper
 		 */		
 		function getWrapperHeight(){
-			// if displaying multiple slides, multiple wrapper width by number of slides to display
-			var wrapperHeight = $firstChild.outerHeight() * options.displaySlideQty;
-			return wrapperHeight;
-		}
+ 			// if displaying multiple slides, multiple wrapper width by number of slides to display
+ 			var wrapperHeight = getHighestChild().outerHeight() * options.displaySlideQty;
+ 			return wrapperHeight;
+ 		}
+
+ 		function getHighestChild() {
+ 		  var $t = 0;
+ 	    var $current;
+ 		  $parent.children().each(function  () {
+ 		    $this = $(this);
+ 		    if ($this.outerHeight() > $t) {
+ 		      $current = $this;
+ 		      $t = $this.outerHeight();
+ 		    };
+ 		  });
+ 		  return $current;
+ 		}
 		
 		/**
 		 * Returns a sample of an arry and loops back on itself if the end of the array is reached
