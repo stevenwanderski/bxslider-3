@@ -718,6 +718,7 @@
 		 * Sets all variables associated with the controls
 		 */		
 		function setControlsVars(){
+			var nextType, nextContent, prevType, prevContent;
 			// check if text or images should be used for controls
 			// check "next"
 			if(options.nextImage != ''){
@@ -861,6 +862,7 @@
 		 * Sets all variables associated with the controls
 		 */		
 		function setAutoControlsVars(){
+			var startType, startContent, stopType, stopContent;
 			// check if text or images should be used for controls
 			// check "start"
 			if(options.startImage != ''){
