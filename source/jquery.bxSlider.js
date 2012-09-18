@@ -810,7 +810,7 @@
 				options.tickerSpeed *= 10;
 												
 				// get the total width of the original show
-				$outerWrapper.children('.pager').each(function(index) {
+				$('.pager', $outerWrapper).each(function(index) {
 				  origShowWidth += $(this).width();
 					origShowHeight += $(this).height();
 				});
