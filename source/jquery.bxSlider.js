@@ -16,6 +16,7 @@
 				
 		var defaults = {
 			mode: 'horizontal',									// 'horizontal', 'vertical', 'fade'
+			childSelector: '',  					      // jQuery selector - elements to be used as slides
 			infiniteLoop: true,									// true, false - display first slide after last
 			hideControlOnEnd: false,						// true, false - if true, will hide 'next' control on last slide and 'prev' control on first
 			controls: true,											// true, false - previous and next controls
@@ -63,7 +64,7 @@
 			onFirstSlide: function(){},					// function(currentSlideNumber, totalSlideQty, currentSlideHtmlObject) - advanced use only! see the tutorial here: http://bxslider.com/custom-pager
 			onNextSlide: function(){},					// function(currentSlideNumber, totalSlideQty, currentSlideHtmlObject) - advanced use only! see the tutorial here: http://bxslider.com/custom-pager
 			onPrevSlide: function(){},					// function(currentSlideNumber, totalSlideQty, currentSlideHtmlObject) - advanced use only! see the tutorial here: http://bxslider.com/custom-pager
-			buildPager: null										// function(slideIndex, slideHtmlObject){ return string; } - advanced use only! see the tutorial here: http://bxslider.com/custom-pager
+			buildPager: null,										// function(slideIndex, slideHtmlObject){ return string; } - advanced use only! see the tutorial here: http://bxslider.com/custom-pager
 		}
 		
 		var options = $.extend(defaults, options);
@@ -500,9 +501,9 @@
 			// base = this;
 			$parent = $(this);
 			$origElement = $parent.clone();
-			$children = $parent.children();
+			$children = $parent.children(options.childSelector);
 			$outerWrapper = '';
-			$firstChild = $parent.children(':first');
+			$firstChild = $parent.children(options.childSelector + ':first');
 			childrenWidth = $firstChild.width();
 			childrenMaxWidth = 0;
 			childrenOuterWidth = $firstChild.outerWidth();
@@ -617,7 +618,7 @@
 			// unwrap all bx-wrappers
 			$parent.unwrap().unwrap().removeAttr('style');
 			// remove any styles that were appended
-			$parent.children().removeAttr('style').not('.bx-child').remove();
+			$parent.children(options.childSelector).removeAttr('style').not('.bx-child').remove();
 			// remove any childrent that were appended
 			$children.removeClass('bx-child');
 			
@@ -650,7 +651,7 @@
 				  position: 'relative',
 					left: '-'+(options.infiniteLoop ? origLeft : 0)+'px'
 				});
-				$parent.children().css({
+				$parent.children(options.childSelector).css({
 					width: childrenWidth,
 				  'float': 'left',
 				  listStyle: 'none'
@@ -668,7 +669,7 @@
 				  position: 'relative',
 					top: '-'+(origTop)+'px'
 				});
-				$parent.children().css({
+				$parent.children(options.childSelector).css({
 				  listStyle: 'none',
 					height: childrenMaxHeight
 				});					
@@ -680,7 +681,7 @@
 				$parent
 				.wrap('<div class="'+options.wrapperClass+'" style="width:'+childrenMaxWidth+'px; position:relative;"></div>')
 				.wrap('<div class="bx-window" style="height:'+childrenMaxHeight+'px; width:'+childrenMaxWidth+'px; position:relative; overflow:hidden;"></div>');
-				$parent.children().css({
+				$parent.children(options.childSelector).css({
 				  listStyle: 'none',
 				  position: 'absolute',
 					top: 0,
