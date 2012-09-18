@@ -1176,7 +1176,7 @@
 		 * Returns the left offset of the slide from the parent container
 		 */		
 		function getSlidePosition(number, side){			
-			var $slidePosition = $parent.children('.pager').eq(number).position();
+			var $slidePosition = $parent.children('.bx-child').eq(number).position();
 			return (side == 'left') ? $slidePosition.left : $slidePosition.top;
 		}
 		
