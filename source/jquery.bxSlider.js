@@ -1164,7 +1164,8 @@
 					$outerWrapper.children('.bx-prev').show();
 				}
 				// check next
-				if(currentSlide == lastSlide){
+				var lastPossibleSlide = Math.floor(lastSlide/options.displaySlideQty) * options.displaySlideQty;
+        if(currentSlide >= lastPossibleSlide){
 					$outerWrapper.children('.bx-next').hide();
 				}else{
 					$outerWrapper.children('.bx-next').show();
