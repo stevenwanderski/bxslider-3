@@ -10,7 +10,6 @@
  * 
  */
 
-
 (function($){
 	
 	$.fn.bxSlider = function(options){		
@@ -278,7 +277,7 @@
 						currentSlide = 0;
 						// if specified, hide the control on the last slide
 						if(options.hideControlOnEnd){
-							$('.bx-prev', $outerWrapper).hide();
+							$outerWrapper.children('.bx-prev', ).hide();
 						}
 					}
 					checkEndControls();
@@ -597,7 +596,7 @@
 			// stop the auto show
 			clearInterval(interval);
 			// remove any controls / pagers that have been appended
-			$('.bx-next, .bx-prev, .bx-pager, .bx-auto', $outerWrapper).remove();
+			$outerWrapper.children('.bx-next, .bx-prev, .bx-pager, .bx-auto').remove();
 			// unwrap all bx-wrappers
 			$parent.unwrap().unwrap().removeAttr('style');
 			// remove any styles that were appended
@@ -792,7 +791,7 @@
 				options.tickerSpeed *= 10;
 												
 				// get the total width of the original show
-				$('.pager', $outerWrapper).each(function(index) {
+				$outerWrapper.children('.pager').each(function(index) {
 				  origShowWidth += $(this).width();
 					origShowHeight += $(this).height();
 				});
@@ -887,7 +886,7 @@
 		 */		
 		function setAutoHover(){
 			// hover over the slider window
-			$outerWrapper.find('.bx-window').hover(function() {
+			$outerWrapper.children('.bx-window').hover(function() {
 				if(autoPlaying){
 					base.stopShow(false);
 				}
@@ -1044,7 +1043,7 @@
 					$outerWrapper.append($pagerContainer);
 				}
 				// cache the pager element
-				$pager = $('.bx-pager', $outerWrapper);
+				$pager = $outerWrapper.children('.bx-pager');
 			}
 			$pager.children().click(function() {
 				// only if pager is full mode
@@ -1073,14 +1072,14 @@
 				if(options.captionsSelector){
 					$(options.captionsSelector).html(caption);
 				}else{
-					$('.bx-captions', $outerWrapper).html(caption);
+					$outerWrapper.children('.bx-captions').html(caption);
 				}
 			}else{
 				// if user supplied a selector
 				if(options.captionsSelector){
 					$(options.captionsSelector).html('&nbsp;');
 				}else{
-					$('.bx-captions', $outerWrapper).html('&nbsp;');
+					$outerWrapper.children('.bx-captions').html('&nbsp;');
 				}				
 			}
 		}
@@ -1112,7 +1111,7 @@
 				$(options.autoControlsSelector).append($autoControls);
 			}else{
 				$outerWrapper.append('<div class="bx-auto"></div>');
-				$('.bx-auto', $outerWrapper).html($autoControls);
+				$outerWrapper.children('.bx-auto').html($autoControls);
 			}
 						
 			// click start control
@@ -1142,15 +1141,15 @@
 			if(!options.infiniteLoop && options.hideControlOnEnd){
 				// check previous
 				if(currentSlide == firstSlide){
-					$('.bx-prev', $outerWrapper).hide();				
+					$outerWrapper.children('.bx-prev').hide();				
 				}else{
-					$('.bx-prev', $outerWrapper).show();
+					$outerWrapper.children('.bx-prev').show();
 				}
 				// check next
 				if(currentSlide == lastSlide){
-					$('.bx-next', $outerWrapper).hide();
+					$outerWrapper.children('.bx-next').hide();
 				}else{
-					$('.bx-next', $outerWrapper).show();
+					$outerWrapper.children('.bx-next').show();
 				}
 			}
 		}
@@ -1159,12 +1158,8 @@
 		 * Returns the left offset of the slide from the parent container
 		 */		
 		function getSlidePosition(number, side){			
-			if(side == 'left'){
-				var position = $('.pager', $outerWrapper).eq(number).position().left;
-			}else if(side == 'top'){
-				var position = $('.pager', $outerWrapper).eq(number).position().top;
-			}
-			return position;
+			var $slidePosition = $parent.children('.pager').eq(number).position();
+			return (side == 'left') ? $slidePosition.left : $slidePosition.top;
 		}
 		
 		/**
@@ -1257,4 +1252,3 @@
 
 		
 })(jQuery);
-
