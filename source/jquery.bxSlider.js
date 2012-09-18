@@ -923,11 +923,11 @@
 			// on hover stop the animation
 			$parent.hover(function() {
 				if(autoPlaying){
-					base.suspendShow(false);
+					base.stopTicker(false);
 				}
 			}, function() {
 				if(autoPlaying){
-					base.restartTicker(false);
+					base.startTicker(false);
 				}
 			});
 		}		
