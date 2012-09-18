@@ -277,7 +277,7 @@
 						currentSlide = 0;
 						// if specified, hide the control on the last slide
 						if(options.hideControlOnEnd){
-							$outerWrapper.children('.bx-prev', ).hide();
+							$outerWrapper.children('.bx-prev').hide();
 						}
 					}
 					checkEndControls();
