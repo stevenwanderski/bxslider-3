@@ -490,7 +490,7 @@
 			$firstChild = $parent.children(':first');
 			childrenWidth = $firstChild.width();
 			childrenMaxWidth = 0;
-			childrenOuterWidth = $firstChild.outerWidth();
+			childrenOuterWidth = $firstChild.outerWidth(true);
 			childrenMaxHeight = 0;
 			wrapperWidth = getWrapperWidth();
 			wrapperHeight = getWrapperHeight();
@@ -516,11 +516,11 @@
 						
 			// get the largest child's height and width
 			$children.each(function(index) {
-			  if($(this).outerHeight() > childrenMaxHeight){
-					childrenMaxHeight = $(this).outerHeight();
+			  if($(this).outerHeight(true) > childrenMaxHeight){
+					childrenMaxHeight = $(this).outerHeight(true);
 				}
-				if($(this).outerWidth() > childrenMaxWidth){
-					childrenMaxWidth = $(this).outerWidth();
+				if($(this).outerWidth(true) > childrenMaxWidth){
+					childrenMaxWidth = $(this).outerWidth(true);
 				}
 			});
 
@@ -1171,7 +1171,7 @@
 		 * Returns the width of the wrapper
 		 */		
 		function getWrapperWidth(){
-			var wrapperWidth = $firstChild.outerWidth() * options.displaySlideQty;
+			var wrapperWidth = $firstChild.outerWidth(true) * options.displaySlideQty;
 			return wrapperWidth;
 		}
 		
@@ -1180,7 +1180,7 @@
 		 */		
 		function getWrapperHeight(){
  			// if displaying multiple slides, multiple wrapper width by number of slides to display
- 			var wrapperHeight = getHighestChild().outerHeight() * options.displaySlideQty;
+ 			var wrapperHeight = getHighestChild().outerHeight(true) * options.displaySlideQty;
  			return wrapperHeight;
  		}
 
@@ -1189,9 +1189,9 @@
  	    var $current;
  		  $parent.children().each(function  () {
  		    $this = $(this);
- 		    if ($this.outerHeight() > $t) {
+ 		    if ($this.outerHeight(true) > $t) {
  		      $current = $this;
- 		      $t = $this.outerHeight();
+ 		      $t = $this.outerHeight(true);
  		    };
  		  });
  		  return $current;
