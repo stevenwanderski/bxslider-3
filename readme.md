@@ -1,8 +1,6 @@
 #This version of bxSlider is now deprecated!
 ##Use bxSlider version 4.0 found [here](http://bxslider.com) and [Github](https://github.com/wandoledzep/bxslider-4)
 
----
-
 jQuery bxSlider v3.0
 http://bxslider.com
 
