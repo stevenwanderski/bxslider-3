@@ -954,10 +954,14 @@
 		 * Makes slide active
 		 */		
 		function makeSlideActive(number){
+			
+			// assign active class to appropiate slide
+			$children.removeClass("bx-current").eq(number).addClass("bx-current");
+			
 			if(options.pagerType == 'full' && options.pager){
 				// remove all active classes
 				$('a', $pager).removeClass(options.pagerActiveClass);
-				// assign active class to appropriate slide
+				// assign active class to appropriate slide pager
 				$('a', $pager).eq(number).addClass(options.pagerActiveClass);
 			}else if(options.pagerType == 'short' && options.pager){
 				$('.bx-pager-current', $pager).html(currentSlide+1);
