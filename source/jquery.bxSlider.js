@@ -15,7 +15,7 @@
 	$.fn.bxSlider = function(options){		
 				
 		var defaults = {
-			mode: 'horizontal',									// 'horizontal', 'vertical', 'fade'
+			mode: 'horizontal',					// 'horizontal', 'vertical', 'fade', 'crossfade'
 			childSelector: '',  					      // jQuery selector - elements to be used as slides
 			infiniteLoop: true,									// true, false - display first slide after last
 			hideControlOnEnd: false,						// true, false - if true, will hide 'next' control on last slide and 'prev' control on first
@@ -64,7 +64,7 @@
 			onFirstSlide: function(){},					// function(currentSlideNumber, totalSlideQty, currentSlideHtmlObject) - advanced use only! see the tutorial here: http://bxslider.com/custom-pager
 			onNextSlide: function(){},					// function(currentSlideNumber, totalSlideQty, currentSlideHtmlObject) - advanced use only! see the tutorial here: http://bxslider.com/custom-pager
 			onPrevSlide: function(){},					// function(currentSlideNumber, totalSlideQty, currentSlideHtmlObject) - advanced use only! see the tutorial here: http://bxslider.com/custom-pager
-			buildPager: null,										// function(slideIndex, slideHtmlObject){ return string; } - advanced use only! see the tutorial here: http://bxslider.com/custom-pager
+			buildPager: null										// function(slideIndex, slideHtmlObject){ return string; } - advanced use only! see the tutorial here: http://bxslider.com/custom-pager
 		}
 		
 		var options = $.extend(defaults, options);
@@ -151,6 +151,8 @@
 				// fade	
 				}else if(options.mode == 'fade'){
 					setChildrenFade();
+				}else if(options.mode == 'crossfade'){
+					setChildrenCrossFade()
 				}
 				// check to remove controls on last/first slide
 				checkEndControls();
@@ -239,6 +241,8 @@
 						});
 					}else if(options.mode == 'fade'){
 						setChildrenFade();
+					}else if(options.mode == 'crossfade'){
+						setChildrenCrossFade()
 					}					
 					// make the current slide active
 					if(options.moveSlideQty > 1){
@@ -335,6 +339,8 @@
 						});
 					}else if(options.mode == 'fade'){
 						setChildrenFade();
+					}else if(options.mode == 'crossfade'){
+						setChildrenCrossFade()
 					}					
 					// make the current slide active
 					if(options.moveSlideQty > 1){
@@ -676,7 +682,7 @@
 				$outerWrapper = $parent.parent().parent();
 				$children.addClass('bx-child');
 			// CSS for fade mode
-			}else if(options.mode == 'fade'){
+			}else if(options.mode == 'fade' || options.mode == 'crossfade'){
 				// wrap the <ul> in div that acts as a window
 				$parent
 				.wrap('<div class="'+options.wrapperClass+'" style="width:'+childrenMaxWidth+'px; position:relative;"></div>')
@@ -940,6 +946,27 @@
 			$children.not(':eq('+currentSlide+')').fadeTo(options.speed, 0).css('zIndex', 98);
 			// fade in the current slide
 			$children.eq(currentSlide).css('zIndex', 99).fadeTo(options.speed, 1, function(){
+				isWorking = false;
+				// ie fade fix
+				if(jQuery.browser.msie){
+					$children.eq(currentSlide).get(0).style.removeAttribute('filter');
+				}
+				// perform the callback function
+				options.onAfterSlide(currentSlide, $children.length, $children.eq(currentSlide));
+			});
+		};
+		
+		/**
+		 * Handles Crossfade animation
+		 */		
+		function setChildrenCrossFade(){
+			var hiddenSlides = $children.not(':eq('+currentSlide+')');
+			// fade out any other child besides the current
+			hiddenSlides.fadeTo(options.speed, 0)
+			// show the current slide
+			$children.eq(currentSlide).css('opacity', 1).fadeTo(options.speed, 1, function(){
+				$(this).css('zIndex', 99);
+				hiddenSlides.css('zIndex', 98);
 				isWorking = false;
 				// ie fade fix
 				if(jQuery.browser.msie){
