@@ -25,6 +25,7 @@
 			pager: false,												// true / false - display a pager
 			pagerSelector: null,								// jQuery selector - element to contain the pager. ex: '#pager'
 			pagerType: 'full',									// 'full', 'short' - if 'full' pager displays 1,2,3... if 'short' pager displays 1 / 4
+			pagerText: true,									// true, false - if true pager does NOT display text, just buttons
 			pagerLocation: 'bottom',						// 'bottom', 'top' - location of pager
 			pagerShortSeparator: '/',						// string - ex: 'of' pager would display 1 of 4
 			pagerActiveClass: 'pager-active',		// string - classname attached to the active pager link
@@ -64,7 +65,7 @@
 			onFirstSlide: function(){},					// function(currentSlideNumber, totalSlideQty, currentSlideHtmlObject) - advanced use only! see the tutorial here: http://bxslider.com/custom-pager
 			onNextSlide: function(){},					// function(currentSlideNumber, totalSlideQty, currentSlideHtmlObject) - advanced use only! see the tutorial here: http://bxslider.com/custom-pager
 			onPrevSlide: function(){},					// function(currentSlideNumber, totalSlideQty, currentSlideHtmlObject) - advanced use only! see the tutorial here: http://bxslider.com/custom-pager
-			buildPager: null,										// function(slideIndex, slideHtmlObject){ return string; } - advanced use only! see the tutorial here: http://bxslider.com/custom-pager
+			buildPager: null										// function(slideIndex, slideHtmlObject){ return string; } - advanced use only! see the tutorial here: http://bxslider.com/custom-pager
 		}
 		
 		var options = $.extend(defaults, options);
@@ -559,9 +560,9 @@
 			// check to show pager
 			if(options.pager && !options.ticker){
 				if(options.pagerType == 'full'){
-					showPager('full');
+					showPager('full', options.pagerText);
 				}else if(options.pagerType == 'short'){
-					showPager('short');
+					showPager('short', options.pagerText);
 				}
 			}
 						
@@ -1017,7 +1018,7 @@
 		 *
 		 * @param string type 'full', 'short'
 		 */		
-		function showPager(type){
+		function showPager(type, pagerText){
 			// sets up logic for finite multi slide shows
 			var pagerQty = $children.length;
 			// if we are moving more than one at a time and we have a finite loop
@@ -1042,11 +1043,21 @@
 			}else if(type == 'full'){
 				// build the full pager
 				for(var i=1; i<=pagerQty; i++){
-					pagerString += '<a href="" class="pager-link pager-'+i+'">'+i+'</a>';
+					if (pagerText)
+					{
+						pagerString += '<a href="" class="pager-link pager-'+i+'">'+i+'</a>';
+					}
+					else
+					{
+						pagerString += '<a href="" class="pager-link pager-'+i+'"></a>';
+					}
 				}
 			}else if(type == 'short') {
 				// build the short pager
-				pagerString = '<span class="bx-pager-current">'+(options.startingSlide+1)+'</span> '+options.pagerShortSeparator+' <span class="bx-pager-total">'+$children.length+'</span>';
+				if (pagerText)
+				{
+					pagerString = '<span class="bx-pager-current">'+(options.startingSlide+1)+'</span> '+options.pagerShortSeparator+' <span class="bx-pager-total">'+$children.length+'</span>';
+				}
 			}	
 			// check if user supplied a pager selector
 			if(options.pagerSelector){
