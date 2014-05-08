@@ -1,5 +1,5 @@
 /**
- * jQuery bxSlider v3.0
+ * jQuery bxSlider v3.1
  * http://bxslider.com
  *
  * Copyright 2011, Steven Wanderski
