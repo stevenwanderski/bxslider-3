@@ -528,7 +528,7 @@
 			tickerTop = 0;
       
 			firstSlide = 0;
-			lastSlide = $children.length - 1;
+			lastSlide = $children.length - options.displaySlideQty;
 						
 			// get the largest child's height and width
 			$children.each(function(index) {
